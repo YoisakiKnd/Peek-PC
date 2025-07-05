@@ -28,20 +28,12 @@ jobs:
         run: |
           nuitka --standalone --onefile --windows-icon-from-ico=icon.ico --enable-plugin=pylint-warnings main.py
 
-      - name: Find built exe
-        id: find_exe
-        shell: python
-        run: |
-          import os
-          for f in os.listdir('.'):
-              if f.endswith('.exe'):
-                  print(f"::set-output name=exe::{f}")
-                  break
-          else:
-              raise Exception('No exe found!')
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: peek-exe
-          path: ${{ steps.find_exe.outputs.exe }}
+          path: |
+            main.exe
+            main.dist/main.exe
+            main.bin.exe
+            main.build/main.exe
