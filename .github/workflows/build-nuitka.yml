@@ -26,14 +26,14 @@ jobs:
 
       - name: Build with Nuitka
         run: |
-          nuitka --standalone --onefile --windows-icon-from-ico=icon.ico --enable-plugin=pylint-warnings main.py
+          nuitka --standalone --onefile --output-filename=peek.exe --windows-icon-from-ico=icon.ico --enable-plugin=pylint-warnings main.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: peek-exe
           path: |
-            main.exe
-            main.dist/main.exe
+            peek.exe
+            main.dist/peek.exe
             main.bin.exe
-            main.build/main.exe
+            main.build/peek.exe
